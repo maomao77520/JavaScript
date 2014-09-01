@@ -1,0 +1,22 @@
+//the kth max number of array(element of array is unique)
+//快排变形，从大到小排序，比较k和标杆元素的下标，若k大，则在右边的数组递归查找，反之在左边数组找,O(n)
+function KMax(arr,k){
+   var pivot = arr[0],len = arr.length,i =1;
+   var left=[],right=[];
+   while(i < len){   //从大到小排序
+   	  if(arr[i] < pivot){
+   	  	right.push(arr[i]);
+   	  }else{
+   	  	left.push(arr[i]);
+   	  }
+   	  i++;
+   }
+
+   if(k == left.length + 1){ 
+   	  return pivot;
+   }else if(k <= left.length){
+   	  return KMax(left,k);
+   }else{
+   	  return KMax(right,k-left.length-1);
+   }
+}
